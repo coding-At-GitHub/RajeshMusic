@@ -19,13 +19,13 @@ const MusicPlayer = () => {
 
     const [track, setTrack] = useState<Track | null>()
 
-    useTrackPlayerEvents([Event.PlaybackActiveTrackChanged], async event => {
+    useTrackPlayerEvents([Event.PlaybackActiveTrackChanged], async (event:any) => {
     // useTrackPlayerEvents([Event.PlaybackTrackChanged], async event => {
         switch (event.type) {
             case Event.PlaybackActiveTrackChanged:
-                // const playingTrack = await TrackPlayer.getTrack(event.track)
-                // setTrack(playingTrack)
-                setTrack(event.track)
+                const playingTrack = await TrackPlayer.getTrack(event.track)
+                setTrack(playingTrack)
+                // setTrack(event.track)
                 break;
         
         }
@@ -47,20 +47,20 @@ const MusicPlayer = () => {
         )
     }
 
-    useEffect(() => {
-      const fetchNextTrackInformation = async () => {
-        const queue = await TrackPlayer.getQueue();
-        const currentTrackIndex = queue.findIndex((queuedTrack) => queuedTrack.id === track?.id);
-        const nextTrack = queue[currentTrackIndex + 1];
+    // useEffect(() => {
+    //   const fetchNextTrackInformation = async () => {
+    //     const queue = await TrackPlayer.getQueue();
+    //     const currentTrackIndex = queue.findIndex((queuedTrack) => queuedTrack.id === track?.id);
+    //     const nextTrack = queue[currentTrackIndex + 1];
         
-        // Now, 'nextTrack' contains information about the next track
-        console.log('Next Track:', nextTrack);
-      };
+    //     // Now, 'nextTrack' contains information about the next track
+    //     console.log('Next Track:', nextTrack);
+    //   };
   
-      if (track) {
-        fetchNextTrackInformation();
-      }
-    }, [track]);
+    //   if (track) {
+    //     fetchNextTrackInformation();
+    //   }
+    // }, [track]);
 
   return (
     <View style={styles.container}>
