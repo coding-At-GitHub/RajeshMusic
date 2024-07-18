@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from "react"
-
 import type {PropsWithChildren} from 'react';
 import {
   ActivityIndicator,
@@ -21,11 +20,10 @@ function App(): JSX.Element {
 
   async function setup(){
     let isSetup = await setupPlayer()
-
+    
     if (isSetup) {
       await addTrack()
     }
-
     setIsPaylerReady(isSetup)
   }
 
